@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Testing Chrome desktop notifications</title>
+    <script type="text/javascript" language="javascript">
+      var icon = 'http://farm1.static.flickr.com/79/245536726_94521c750d_s.jpg';
+      function showPopup() {
+        window.webkitNotifications.requestPermission(function() {
+          var popup = window.webkitNotifications.createNotification(
+            icon, 'Message Title', 'Message body'
+          );
+          popup.show();
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#" onclick="showPopup();">Show me a notification!</a>
+  </body>
+</html>
