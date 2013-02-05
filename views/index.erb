@@ -2,20 +2,20 @@
 <html>
   <head>
     <title>Pomodoro Timer</title>
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
   </head>
 
   <body>
 
     <div id="permission-request">
       Looks like you haven't enabled desktop notifications,
-      <a href='#' onclick='window.webkitNotifications.requestPermission();'>click here to enable</a>
+      <a href='#' id="permission-request">click here to enable</a>
     </div>
 
     <p>Showing a notification in <span id="countdown">2</span> seconds...</p>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="js/application.js"></script>
+    <script src="application.js"></script>
 
   </body>
 
