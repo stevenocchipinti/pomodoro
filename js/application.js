@@ -7,11 +7,7 @@ $(function($) {
 
   // Check for desktop notification permissions
   if (window.webkitNotifications.checkPermission() !== 0)
-    $("#permission").html(
-      "Looks like you haven't enabled desktop notifications, " +
-      "<a href='#' onclick='window.webkitNotifications.requestPermission();'>" +
-      "click here to enable</a>"
-    );
+    $("#permission-request").show();
 
   function showPopup() {
     if (window.webkitNotifications.checkPermission() == 0) {
@@ -30,6 +26,5 @@ $(function($) {
       clearInterval(timer);
     }
   }
-
 
 });
