@@ -1,9 +1,9 @@
 $(function($) {
 
-  var icon = 'icon.jpg';
-  var snd = new Audio("file.wav");
+  var icon = 'public/icon.jpg';
+  var snd = new Audio("public/notification.wav");
   var countdown = parseInt($('#countdown').html());
-  var timer = 0;
+  var timer = setInterval(tick, 1000);
 
   // Check for desktop notification permissions
   if (window.webkitNotifications.checkPermission() !== 0)
@@ -31,6 +31,5 @@ $(function($) {
     }
   }
 
-  timer = setInterval(tick, 1000);
 
 });
