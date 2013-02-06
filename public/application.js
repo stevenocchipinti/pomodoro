@@ -20,7 +20,7 @@ $(function($) {
     }
   }
 
-  function showPopup() {
+  function showNotification() {
     if (window.webkitNotifications.checkPermission() == 0) {
       var popup = window.webkitNotifications.createNotification(
         icon, 'Pomodoro', 'Pomodoro complete - take a break!'
@@ -33,7 +33,7 @@ $(function($) {
   function tick() {
     displayTimer(--countdown);
     if (countdown == 0) {
-      showPopup();
+      showNotification();
       clearInterval(timer);
     }
   }
