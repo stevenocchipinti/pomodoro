@@ -1,18 +1,23 @@
 $(function($) {
 
-  var icon = 'icon.jpg';
-  var snd = new Audio("notification.wav");
-  var countdown = parseInt($('#countdown').html());
+  setupNotifications();
+  // notificationTime is set from the server (via index.erb)
+  var countdown = secondsUntilNotification(notificationTime);
+  $("#countdown").html(countdown);
   var timer = setInterval(tick, 1000);
 
-  // Check for desktop notification permissions
-  if (window.webkitNotifications.checkPermission() !== 0)
-    $("#permission-request").show();
+  var icon = 'icon.jpg';
+  var snd = new Audio("notification.wav");
 
-  $("a#permission-request").click(function requestPermission() {
-    window.webkitNotifications.requestPermission();
-    $("#permission-request").hide();
-  });
+  function setupNotifications() {
+    $("a#permission-request").click(function requestPermission() {
+      window.webkitNotifications.requestPermission();
+      $("#permission-request").hide();
+    });
+    if (window.webkitNotifications.checkPermission() !== 0) {
+      $("#permission-request").show();
+    }
+  }
 
   function showPopup() {
     if (window.webkitNotifications.checkPermission() == 0) {
@@ -30,6 +35,13 @@ $(function($) {
       showPopup();
       clearInterval(timer);
     }
+  }
+
+  function secondsUntilNotification(notificationTime) {
+    var now = new Date().getTime();
+    var defaultTime = now + 25*60*1000;
+    var then = notificationTime || defaultTime;
+    return parseInt((then - now) / 1000);
   }
 
 });
