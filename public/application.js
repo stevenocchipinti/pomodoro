@@ -1,9 +1,10 @@
 $(function($) {
 
   setupNotifications();
+
   // notificationTime is set from the server (via index.erb)
   var countdown = secondsUntilNotification(notificationTime);
-  $("#countdown").html(countdown);
+  displayTimer(countdown);
   var timer = setInterval(tick, 1000);
 
   var icon = 'icon.jpg';
@@ -30,7 +31,7 @@ $(function($) {
   }
 
   function tick() {
-    $("#countdown").html(--countdown);
+    displayTimer(--countdown);
     if (countdown == 0) {
       showPopup();
       clearInterval(timer);
@@ -42,6 +43,13 @@ $(function($) {
     var defaultTime = now + 25*60*1000;
     var then = notificationTime || defaultTime;
     return parseInt((then - now) / 1000);
+  }
+
+  function displayTimer(seconds) {
+    var m = parseInt(seconds / 60);
+    var s = parseInt(seconds - m * 60);
+    if (s.toString().length == 1) s = "0" + s;
+    $("#countdown").html(m + ":" + s);
   }
 
 });
