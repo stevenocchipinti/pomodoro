@@ -10,6 +10,13 @@ $(function($) {
   var icon = 'icon.jpg';
   var snd = new Audio("notification.wav");
 
+  $('#form').submit(function() {
+    $('#notificationTime').val(
+      new Date().getTime() + $("#minutes").val() * 60 * 1000
+    );
+  });
+
+
   function setupNotifications() {
     $("a#permission-request").click(function requestPermission() {
       window.webkitNotifications.requestPermission();
@@ -31,18 +38,20 @@ $(function($) {
   }
 
   function tick() {
-    displayTimer(--countdown);
-    if (countdown == 0) {
-      showNotification();
+    if (countdown <= 0) {
       clearInterval(timer);
+      return;
     }
+    displayTimer(--countdown);
+    if (countdown == 0) showNotification();
   }
 
   function secondsUntilNotification(notificationTime) {
     var now = new Date().getTime();
     var defaultTime = now + 25*60*1000;
     var then = notificationTime || defaultTime;
-    return parseInt((then - now) / 1000);
+    var seconds = parseInt((then - now) / 1000);
+    return seconds > 0 ? seconds : 0;
   }
 
   function displayTimer(seconds) {

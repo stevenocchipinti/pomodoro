@@ -12,6 +12,15 @@
       <a href='#' id="permission-request">click here to enable</a>
     </div>
 
+    <form id='form' action='/' method='post'>
+      <label for="name">Name:</label>
+      <input id="name" name="name" type="text"/>
+      <label for="timer">Minutes:</label>
+      <input id="minutes" name="minutes" type="number" value="25"/>
+      <input id="notificationTime" name="notificationTime" type="hidden"/>
+      <input type="submit" value="Start"/>
+    </form>
+
     <p>Showing a notification in <span id="countdown">x</span> seconds...</p>
 
     <script src="jquery.js"></script>
