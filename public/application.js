@@ -9,13 +9,20 @@ $(function($) {
   if (serverNotificationTime)
     var timer = setInterval(tick, 1000);
 
-  var icon = 'icon.jpg';
+  var icon = "icon.jpg";
   var snd = new Audio("notification.wav");
 
-  $('#form').submit(function() {
-    $('#notificationTime').val(
-      new Date().getTime() + $("#minutes").val() * 60 * 1000
-    );
+  $("#form").submit(function() {
+    if ($("#toggle").val() == "Start") {
+      $("#notificationTime").val(
+        new Date().getTime() + $("#minutes").val() * 60 * 1000
+      );
+      $("#toggle").val("Stop");
+    } else {
+      clearInterval(timer);
+      $("#notificationTime").val(0);
+      $("#toggle").val("Start");
+    }
   });
 
   //////////////////////////////////////////////////////////////////////////////
@@ -33,7 +40,7 @@ $(function($) {
   function showNotification() {
     if (window.webkitNotifications.checkPermission() == 0) {
       var popup = window.webkitNotifications.createNotification(
-        icon, 'Pomodoro', 'Pomodoro complete - take a break!'
+        icon, "Pomodoro", "Pomodoro complete - take a break!"
       );
       popup.show();
     }
