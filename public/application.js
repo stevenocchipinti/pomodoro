@@ -16,6 +16,7 @@ $(function($) {
     );
   });
 
+  //////////////////////////////////////////////////////////////////////////////
 
   function setupNotifications() {
     $("a#permission-request").click(function requestPermission() {

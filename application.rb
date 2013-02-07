@@ -1,9 +1,12 @@
 require 'sinatra'
 
+notificationTime = nil;
+
 get '/' do
-  erb :index, :locals => {:notificationTime => params[:notificationTime]}
+  erb :index, :locals => {:notificationTime => notificationTime}
 end
 
 post '/' do
-  redirect "/?notificationTime=#{params[:notificationTime]}"
+  notificationTime = params[:notificationTime]
+  redirect "/"
 end
