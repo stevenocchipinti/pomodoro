@@ -2,10 +2,12 @@ $(function($) {
 
   setupNotifications();
 
-  // notificationTime is set from the server (via index.erb)
-  var countdown = secondsUntilNotification(notificationTime);
+  // serverNotificationTime is set from the server via index.erb
+  var countdown = secondsUntilNotification(serverNotificationTime);
   displayTimer(countdown);
-  var timer = setInterval(tick, 1000);
+
+  if (serverNotificationTime)
+    var timer = setInterval(tick, 1000);
 
   var icon = 'icon.jpg';
   var snd = new Audio("notification.wav");
