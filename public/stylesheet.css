@@ -1,3 +1,18 @@
+body {
+  text-align: center;
+  background-color: #FFD3D3;
+}
+h1 {
+  font-family: 'Wendy One', cursive;
+  font-size: 64px;
+  margin: 80px 0px;
+  color: #F00;
+}
 div#permission-request {
   display: none;
+  background-color: rgba(252, 48, 40, 0.75);
+  line-height: 50px;
+  font-size: 18px;
+  text-align: center;
+  box-shadow: 0px 3px 3px #888;
 }

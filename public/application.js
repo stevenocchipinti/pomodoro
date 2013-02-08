@@ -37,7 +37,7 @@ $(function($) {
       $("#permission-request").hide();
     });
     if (window.webkitNotifications.checkPermission() !== 0) {
-      $("#permission-request").show();
+      $("#permission-request").slideDown("slow");
     }
   }
 
