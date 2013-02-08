@@ -1,11 +1,10 @@
 body {
   text-align: center;
-  background-color: #FFD3D3;
 }
 h1 {
   font-family: 'Wendy One', cursive;
   font-size: 64px;
-  margin: 80px 0px;
+  margin: 60px 0px;
   color: #F00;
 }
 div#permission-request {
@@ -15,4 +14,11 @@ div#permission-request {
   font-size: 18px;
   text-align: center;
   box-shadow: 0px 3px 3px #888;
+}
+img {
+  margin-bottom: 50px;
+}
+label {
+  font-size: 18px;
+  font-weight: bold;
 }

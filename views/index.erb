@@ -16,11 +16,15 @@
 
     <h1>Pomodoro Timer</h1>
 
-    <form id='form' action='/' method='post'>
-      <label for="timer">Minutes:</label>
-      <input id="minutes" name="minutes" type="number" value="25"/>
+    <img src="icon.jpg" alt="pomodoro logo"/>
+
+    <form id='form' action='/' method='post' class="form-inline">
+      <label for="timer">
+        Minutes:
+        <input id="minutes" name="minutes" type="number" value="25" class="input-mini"/>
+      </label>
       <input id="notificationTime" name="notificationTime" type="hidden"/>
-      <input id="toggle" type="submit" value="Start"/>
+      <input id="toggle" type="submit" value="Start" class="btn"/>
     </form>
 
     <p>Showing a notification in <span id="countdown">x</span> minutes...</p>
