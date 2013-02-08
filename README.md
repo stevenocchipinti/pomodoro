@@ -4,7 +4,7 @@ POMODORO TIMER
 Status
 ------
 
-Not ready
+Usable
 
 
 Description
