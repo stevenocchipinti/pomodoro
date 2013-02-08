@@ -6,8 +6,11 @@ $(function($) {
   var countdown = secondsUntilNotification(serverNotificationTime);
   displayTimer(countdown);
 
-  if (serverNotificationTime)
+  // If already running
+  if (serverNotificationTime && serverNotificationTime > new Date().getTime()) {
     var timer = setInterval(tick, 1000);
+    $("#toggle").val("Stop");
+  }
 
   var icon = "icon.jpg";
   var snd = new Audio("notification.wav");
@@ -20,6 +23,7 @@ $(function($) {
       $("#toggle").val("Stop");
     } else {
       clearInterval(timer);
+      $.post("/", { notificationTime: null });
       $("#notificationTime").val(0);
       $("#toggle").val("Start");
     }
@@ -50,6 +54,7 @@ $(function($) {
   function tick() {
     if (countdown <= 0) {
       clearInterval(timer);
+      $("#toggle").val("Start");
       return;
     }
     displayTimer(--countdown);
