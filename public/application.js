@@ -1,9 +1,9 @@
 $(function($) {
 
-  setupNotifications();
+  Notifications.setup();
 
   // serverNotificationTime is set from the server via index.erb
-  var countdown = secondsUntilNotification(serverNotificationTime);
+  var countdown = secondsUntilTime(serverNotificationTime);
   displayTimer(countdown);
 
   // If already running
@@ -11,9 +11,6 @@ $(function($) {
     var timer = setInterval(tick, 1000);
     $("#toggle").val("Stop");
   }
-
-  var icon = "icon.jpg";
-  var snd = new Audio("notification.wav");
 
   $("#form").submit(function() {
     if ($("#toggle").val() == "Start") {
@@ -31,26 +28,6 @@ $(function($) {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  function setupNotifications() {
-    $("a#permission-request").click(function requestPermission() {
-      window.webkitNotifications.requestPermission();
-      $("#permission-request").hide();
-    });
-    if (window.webkitNotifications.checkPermission() !== 0) {
-      $("#permission-request").slideDown("slow");
-    }
-  }
-
-  function showNotification() {
-    if (window.webkitNotifications.checkPermission() == 0) {
-      var popup = window.webkitNotifications.createNotification(
-        icon, "Pomodoro", "Pomodoro complete - take a break!"
-      );
-      popup.show();
-    }
-    snd.play();
-  }
-
   function tick() {
     if (countdown <= 0) {
       clearInterval(timer);
@@ -58,10 +35,10 @@ $(function($) {
       return;
     }
     displayTimer(--countdown);
-    if (countdown == 0) showNotification();
+    if (countdown == 0) Notifications.show("Pomodoro", "Pomodoro complete!");
   }
 
-  function secondsUntilNotification(notificationTime) {
+  function secondsUntilTime(notificationTime) {
     var now = new Date().getTime();
     var defaultTime = now + 25*60*1000;
     var then = notificationTime || defaultTime;
