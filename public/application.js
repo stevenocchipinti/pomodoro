@@ -43,7 +43,8 @@ $(function($) {
     var defaultTime = now + 25*60*1000;
     var then = notificationTime || defaultTime;
     var seconds = parseInt((then - now) / 1000);
-    return seconds > 0 ? seconds : 0;
+    var defaultSeconds = parseInt((defaultTime - now) / 1000);
+    return seconds > 0 ? seconds : defaultSeconds;
   }
 
   function displayTimer(seconds) {
