@@ -8,5 +8,4 @@ end
 
 post '/' do
   notificationTime = params[:notificationTime]
-  redirect "/"
 end

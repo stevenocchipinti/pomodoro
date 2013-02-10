@@ -17,17 +17,14 @@
 
     <div id="countdown">x</div>
 
-    <form id='form' action='/' method='post' class="form-inline">
+    <div>
       <label for="timer">
-        <input id="minutes" name="minutes" type="number" value="25" class="input-mini"/>
+        <input id="minutes" name="minutes" type="number" value="25"/>
         Minutes
       </label>
-      <input id="notificationTime" name="notificationTime" type="hidden"/>
       <br />
-      <input id="toggle" type="submit" value="Start" class="btn"/>
-    </form>
-
-    <%# <p>Showing a notification in <span id="countdown">x</span> minutes...</p> %>
+      <button id="toggle">Start</button>
+    </div>
 
     <script src="jquery.js"></script>
     <%# <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> %>

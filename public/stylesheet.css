@@ -21,7 +21,7 @@ div#permission-request {
 label {
   font-size: 25px;
 }
-input {
+input,button {
   border: 1px solid #aaa;
   border-radius: 3px;
   padding: 10px;

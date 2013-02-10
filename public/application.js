@@ -3,55 +3,66 @@ $(function($) {
   Notifications.setup();
 
   // serverNotificationTime is set from the server via index.erb
+  var timer = null;
   var countdown = secondsUntilTime(serverNotificationTime);
   displayTimer(countdown);
 
   // If already running
   if (serverNotificationTime && serverNotificationTime > new Date().getTime()) {
-    var timer = setInterval(tick, 1000);
-    $("#toggle").val("Stop");
+    startTimer();
   }
 
-  $("#form").submit(function() {
-    if ($("#toggle").val() == "Start") {
-      $("#notificationTime").val(
-        new Date().getTime() + $("#minutes").val() * 60 * 1000
-      );
-      $("#toggle").val("Stop");
+  $("#toggle").click(function() {
+    var notificationTime = null;
+    if ($("#toggle").text() == "Start") {
+      notificationTime = new Date().getTime() + $("#minutes").val() * 60 * 1000
+      countdown = secondsUntilTime(notificationTime);
+      startTimer();
     } else {
-      clearInterval(timer);
-      $.post("/", { notificationTime: null });
-      $("#notificationTime").val(0);
-      $("#toggle").val("Start");
+      countdown = secondsUntilTime(notificationTime);
+      stopTimer();
     }
+    $.post("/", { notificationTime: notificationTime });
   });
 
   //////////////////////////////////////////////////////////////////////////////
 
+  function startTimer() {
+    displayTimer();
+    timer = setInterval(tick, 1000);
+    $("#toggle").text("Stop");
+  }
+
+  function stopTimer() {
+    clearInterval(timer);
+    displayTimer();
+    $("#toggle").text("Start");
+  }
+
   function tick() {
     if (countdown <= 0) {
-      clearInterval(timer);
-      $("#toggle").val("Start");
+      stopTimer();
       return;
     }
     displayTimer(--countdown);
     if (countdown == 0) Notifications.show("Pomodoro", "Pomodoro complete!");
   }
 
-  function secondsUntilTime(notificationTime) {
-    var now = new Date().getTime();
-    var defaultTime = now + 25*60*1000;
-    var then = notificationTime || defaultTime;
-    var seconds = parseInt((then - now) / 1000);
-    var defaultSeconds = parseInt((defaultTime - now) / 1000);
-    return seconds > 0 ? seconds : defaultSeconds;
-  }
-
   function displayTimer(seconds) {
+    if (!seconds) seconds = countdown;
     var m = parseInt(seconds / 60);
     var s = parseInt(seconds - m * 60);
     if (s.toString().length == 1) s = "0" + s;
     $("#countdown").html(m + ":" + s);
+  }
+
+  function secondsUntilTime(notificationTime) {
+    var now = new Date().getTime();
+    var defaultTime = now + $("#minutes").val() * 60 * 1000;
+    var then = notificationTime || defaultTime;
+    var seconds = parseInt((then - now) / 1000);
+    var defaultSeconds = parseInt((defaultTime - now) / 1000);
+    return seconds > 0 ? seconds : defaultSeconds;
   }
 
 });
