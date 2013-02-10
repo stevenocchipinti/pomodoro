@@ -1,9 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    multi_json (1.5.0)
+    pusher (0.11.3)
+      multi_json (~> 1.0)
+      signature (~> 0.1.6)
     rack (1.5.1)
     rack-protection (1.3.2)
       rack
+    signature (0.1.6)
     sinatra (1.3.4)
       rack (~> 1.4)
       rack-protection (~> 1.3)
@@ -14,4 +19,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  pusher
   sinatra

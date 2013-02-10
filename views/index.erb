@@ -28,6 +28,16 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
+    <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+    <script>
+      // TODO: This is temporary, just to test WebSockets via Pusher
+      var pusher = new Pusher('3521c8facdca5d505db3');
+      var channel = pusher.subscribe('my-channel');
+      channel.bind('my-event', function(data) {
+        alert('An event was triggered with message: ' + data.message);
+      });
+    </script>
+
     <script> var serverNotificationTime = parseInt(<%= notificationTime %>); </script>
     <script src="Notifications.js"></script>
     <script src="Timer.js"></script>
