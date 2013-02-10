@@ -4,20 +4,17 @@ POMODORO TIMER
 Status
 ------
 
-Usable
+V1.0 Working!
 
 
 Description
 -----------
 
-A simple pomodoro timer
+A simple pomodoro timer where the server stores the notification time so that
+all clients that connect will be notified at the same time.
+The notifications use Webkit's notifications (with fallback to alert) and HTML5
+audio playback.
 
-TODO List
----------
-
-Things I would like to get done for the first version:
-* Refactor JS to make it more OO
-* Make it look nicer
 
 Future version
 --------------
