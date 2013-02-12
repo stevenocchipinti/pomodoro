@@ -1,5 +1,22 @@
 $(function($) {
 
+
+  var pusher = new Pusher('3521c8facdca5d505db3');
+  var channel = pusher.subscribe('events');
+
+  // FIXME
+  // channel.bind('start', start);
+  // channel.bind('stop', stop);
+
+  channel.bind('start', function(data) {
+    Timer.set(data.notificationTime);
+    Timer.start();
+  });
+  channel.bind('stop', function(data) {
+    Timer.stop();
+  });
+
+
   Notifications.setup();
 
   // serverNotificationTime is set from the server via index.erb
@@ -12,15 +29,26 @@ $(function($) {
   }
 
   $("#toggle").click(function() {
-    var notificationTime = null;
     if ($("#toggle").text() == "Start") {
-      notificationTime = new Date().getTime() + $("#minutes").val() * 60 * 1000
-      Timer.set(notificationTime);
-      Timer.start();
+      var notificationTime = new Date().getTime() + $("#minutes").val() * 60 * 1000;
     } else {
-      Timer.stop();
+      var notificationTime = null;
     }
     $.post("/", { notificationTime: notificationTime });
   });
+
+
+  // FIXME
+  // POMODORO OBJECT??!
+
+  function start() {
+    var notificationTime = new Date().getTime() + $("#minutes").val() * 60 * 1000;
+    Timer.set(notificationTime);
+    Timer.start();
+  }
+
+  function stop() {
+    Timer.stop();
+  }
 
 });
