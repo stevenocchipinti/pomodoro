@@ -30,8 +30,10 @@
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
 
     <script>
-      var Pomodoro = {};
-      Pomodoro.serverNotificationTime = parseInt(<%= notification_time %>);
+      var Pomodoro = {
+        sessionName: "<%= session_name %>",
+        serverNotificationTime: parseInt(<%= notification_time %>)
+      };
     </script>
 
     <script src="js/notifications.js"></script>

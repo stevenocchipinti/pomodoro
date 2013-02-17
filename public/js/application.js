@@ -1,8 +1,12 @@
 $(function($) {
 
+  // The following variables are set from the server via index.erb:
+  //   Pomodoro.sessionName
+  //   Pomodoro.serverNotificationTime
+
   // Setup Pusher for start/stop via WebSockets
   var pusher = new Pusher('3521c8facdca5d505db3');
-  var channel = pusher.subscribe('events');
+  var channel = pusher.subscribe(Pomodoro.sessionName);
   channel.bind('start', function(data) {
     Pomodoro.timer.set(data.notificationTime);
     Pomodoro.timer.start();
@@ -15,7 +19,6 @@ $(function($) {
   Pomodoro.notifications.setup();
 
   // Automatically start the timer if it is already running
-  // serverNotificationTime is set from the server via index.erb
   Pomodoro.timer.set(Pomodoro.serverNotificationTime);
   if (Pomodoro.serverNotificationTime &&
       Pomodoro.serverNotificationTime > new Date().getTime()) {
@@ -29,7 +32,10 @@ $(function($) {
     } else {
       var notificationTime = null;
     }
-    $.post("/", { notificationTime: notificationTime });
+    $.post("/", {
+      sessionName: Pomodoro.sessionName,
+      notificationTime: notificationTime
+    });
   });
 
 });
