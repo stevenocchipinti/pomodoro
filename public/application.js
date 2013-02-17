@@ -4,21 +4,22 @@ $(function($) {
   var pusher = new Pusher('3521c8facdca5d505db3');
   var channel = pusher.subscribe('events');
   channel.bind('start', function(data) {
-    Timer.set(data.notificationTime);
-    Timer.start();
+    Pomodoro.timer.set(data.notificationTime);
+    Pomodoro.timer.start();
   });
   channel.bind('stop', function(data) {
-    Timer.stop();
+    Pomodoro.timer.stop();
   });
 
   // WebKit popup notifications and HTML5 audio playback
-  Notifications.setup();
+  Pomodoro.notifications.setup();
 
   // Automatically start the timer if it is already running
   // serverNotificationTime is set from the server via index.erb
-  Timer.set(serverNotificationTime);
-  if (serverNotificationTime && serverNotificationTime > new Date().getTime()) {
-    Timer.start();
+  Pomodoro.timer.set(Pomodoro.serverNotificationTime);
+  if (Pomodoro.serverNotificationTime &&
+      Pomodoro.serverNotificationTime > new Date().getTime()) {
+    Pomodoro.timer.start();
   }
 
   // Make the button notify the server of a start or stop event

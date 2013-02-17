@@ -1,4 +1,4 @@
-var Timer = {
+Pomodoro.timer = {
 
   countdown: 0,
   timer: null,
@@ -33,7 +33,7 @@ var Timer = {
       that.decrement();
       that.updateDisplay();
       if (that.countdown == 0) {
-        Notifications.show("Pomodoro", "Pomodoro complete!");
+        Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");
       }
     }, 1000);
   },

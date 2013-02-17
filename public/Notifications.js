@@ -1,4 +1,4 @@
-var Notifications = {
+Pomodoro.notifications = {
 
   setup: function() {
     if (window.webkitNotifications) {
