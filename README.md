@@ -16,12 +16,6 @@ The notifications use Webkit's notifications (with fallback to alert) and HTML5
 audio playback.
 
 
-TODO
-----
-
-* Multiple named sessions (with a default session?)
-
-
 Caveats
 -------
 
