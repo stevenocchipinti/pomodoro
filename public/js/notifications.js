@@ -13,8 +13,8 @@ Pomodoro.notifications = {
   },
 
   show: function(title, text) {
-    var icon = "icon.jpg";
-    new Audio("notification.wav").play();
+    var icon = "images/icon.jpg";
+    new Audio("audio/notification.wav").play();
     if (window.webkitNotifications) {
       if (window.webkitNotifications.checkPermission() == 0) {
         window.webkitNotifications.createNotification(icon, title, text).show();
