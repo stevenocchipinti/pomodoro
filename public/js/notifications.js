@@ -17,7 +17,11 @@ Pomodoro.notifications = {
     new Audio("audio/notification.wav").play();
     if (window.webkitNotifications) {
       if (window.webkitNotifications.checkPermission() == 0) {
-        window.webkitNotifications.createNotification(icon, title, text).show();
+        var popup = window.webkitNotifications.createNotification(icon, title, text);
+        popup.show();
+        setTimeout(function() {
+          popup.cancel();
+        }, 5000);
       }
     } else {
       alert(text);
