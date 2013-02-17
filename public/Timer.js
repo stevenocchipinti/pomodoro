@@ -14,6 +14,7 @@ var Timer = {
     var seconds = parseInt((then - now) / 1000);
     var defaultSeconds = parseInt((defaultTime - now) / 1000);
     this.countdown = seconds > 0 ? seconds : defaultSeconds;
+    this.updateDisplay();
   },
 
   reset: function() {
