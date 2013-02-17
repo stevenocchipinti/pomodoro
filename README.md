@@ -19,9 +19,6 @@ audio playback.
 TODO
 ----
 
-* Refactor JS
-  * Put all 'objects' under an application namespace
-  * Remove the incorrect use of captial letters (Notifications.js, Timer.js)
 * Multiple named sessions (with a default session?)
 
 
@@ -42,3 +39,9 @@ timer every second (while it is running) and another event for the notification
 it self. This would mean regardless of the users clock, timezones, etc. the
 timer would be synchronised, but this will require a background job per session
 and a lot more websockets messages.
+
+Possible gems that could help are:
+* **Thin, Puma, etc.** - a webserver that supports streaming responses could be
+  used to host the websockets server, use Server Sent Events (more widely
+  supported), etc.
+* **Suckerpunch** - for async jobs in a single process
