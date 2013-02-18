@@ -50,6 +50,7 @@ Pomodoro.timer = {
     var s = parseInt(this.countdown - m * 60);
     if (s.toString().length == 1) s = "0" + s;
     $("#countdown").html(m + ":" + s);
+    document.title = "[" + m + ":" + s + "] " + Pomodoro.applicationName;
   }
 
 };
