@@ -16,6 +16,16 @@ The notifications use Webkit's notifications (with fallback to alert) and HTML5
 audio playback.
 
 
+Todos
+-----
+
+* Store the configured number of minutes again each session
+  * Update the 'minutes' input field of all clients upon 'start'
+  * Implement 'Piecon' based on: 'minutes' left / configured 'minutes'
+* Store statistics
+* Implement 'breaks'... maybe
+
+
 Caveats
 -------
 
