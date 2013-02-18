@@ -25,6 +25,7 @@ Pomodoro.timer = {
     var that = this;
     this.updateDisplay();
     $("#toggle").text("Stop");
+    $("#minutes").prop("disabled", true);
     this.timer = setInterval(function() {
       if (that.countdown <= 0) {
         that.stop();
@@ -43,6 +44,7 @@ Pomodoro.timer = {
     this.reset();
     this.updateDisplay();
     $("#toggle").text("Start");
+    $("#minutes").prop("disabled", false);
   },
 
   updateDisplay: function() {
