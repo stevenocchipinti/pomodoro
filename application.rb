@@ -1,10 +1,9 @@
 require 'sinatra'
 require 'pusher'
 
-# TODO: Reset these keys (these are temp for dev so are ok in GitHub)
-Pusher.app_id = '37160'
-Pusher.key = '3521c8facdca5d505db3'
-Pusher.secret = 'eb1a2ad84e2cda3a095f'
+Pusher.app_id = ENV['PUSHER_APP_ID']
+Pusher.key = ENV['PUSHER_KEY']
+Pusher.secret = ENV['PUSHER_SECRET']
 
 sessions = {
   "default" => nil

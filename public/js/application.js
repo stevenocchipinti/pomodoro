@@ -5,7 +5,7 @@ $(function($) {
   //   Pomodoro.serverNotificationTime
 
   // Setup Pusher for start/stop via WebSockets
-  var pusher = new Pusher('3521c8facdca5d505db3');
+  var pusher = new Pusher(Pomodoro.pusherKey);
   var channel = pusher.subscribe(Pomodoro.sessionName);
   channel.bind('start', function(data) {
     Pomodoro.timer.set(data.notificationTime);
