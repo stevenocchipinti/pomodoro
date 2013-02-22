@@ -21,7 +21,7 @@ Pomodoro.timer = {
     this.set()
   },
 
-  start: function() {
+  start: function(onComplete) {
     var that = this;
     this.updateDisplay();
     $("#toggle").text("Stop");
@@ -34,7 +34,7 @@ Pomodoro.timer = {
       that.decrement();
       that.updateDisplay();
       if (that.countdown == 0) {
-        Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");
+        onComplete();
       }
     }, 1000);
   },

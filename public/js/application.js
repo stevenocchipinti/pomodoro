@@ -9,7 +9,9 @@ $(function($) {
   var channel = pusher.subscribe(Pomodoro.sessionName);
   channel.bind('start', function(data) {
     Pomodoro.timer.set(data.notificationTime);
-    Pomodoro.timer.start();
+    Pomodoro.timer.start(function() {
+      Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");
+    });
   });
   channel.bind('stop', function(data) {
     Pomodoro.timer.stop();
