@@ -22,6 +22,7 @@ Todos
 * Store the configured number of minutes again each session
   * Update the 'minutes' input field of all clients upon 'start'
   * Implement 'Piecon' based on: 'minutes' left / configured 'minutes'
+* Make the notification & timer objects independent of each other via callbacks
 * Store statistics (in a Google spreadsheet?)
 * Implement 'breaks'... maybe
 
