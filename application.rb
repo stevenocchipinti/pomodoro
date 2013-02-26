@@ -1,16 +1,16 @@
-require 'sinatra'
-require 'pusher'
+require "sinatra"
+require "pusher"
 
-Pusher.app_id = ENV['PUSHER_APP_ID']
-Pusher.key = ENV['PUSHER_KEY']
-Pusher.secret = ENV['PUSHER_SECRET']
+Pusher.app_id = ENV["PUSHER_APP_ID"]
+Pusher.key = ENV["PUSHER_KEY"]
+Pusher.secret = ENV["PUSHER_SECRET"]
 
 sessions = {
   "default" => nil
 }
 
 
-get '/*' do |session_name|
+get "/*" do |session_name|
   session_name = "default" unless session_name && !session_name.empty?
   erb :index, :locals => {
     session_name: session_name,
@@ -19,7 +19,7 @@ get '/*' do |session_name|
 end
 
 
-post '/' do
+post "/" do
   session_name = params[:sessionName]
   session_name = "default" unless session_name && !session_name.empty?
   sessions[session_name] = params[:notificationTime]
