@@ -8,7 +8,7 @@ $(function($) {
   var pusher = new Pusher(Pomodoro.pusherKey);
   var channel = pusher.subscribe(Pomodoro.sessionName);
   channel.bind('start', function(data) {
-    Pomodoro.timer.set(data.notificationTime);
+    Pomodoro.timer.set(data.notification_time);
     Pomodoro.timer.start(function() {
       Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");
     });
@@ -27,6 +27,9 @@ $(function($) {
     Pomodoro.timer.start();
   }
 
+  // Set the configured number of minutes to what ever the server set
+  $("#minutes").val(Pomodoro.duration);
+
   // Make the button notify the server of a start or stop event
   $("#toggle").click(function() {
     if ($("#toggle").text() == "Start") {
@@ -36,7 +39,8 @@ $(function($) {
     }
     $.post("/", {
       sessionName: Pomodoro.sessionName,
-      notificationTime: notificationTime
+      notificationTime: notificationTime,
+      duration: $("#minutes").val()
     });
   });
 

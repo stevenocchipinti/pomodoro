@@ -10,6 +10,14 @@ class Session
     @@sessions[name] = self
   end
 
+  def to_hash
+    {
+      name: name,
+      notification_time: notification_time,
+      duration: duration
+    }
+  end
+
   def self.find(name=nil)
     name = "default" if !name || name.empty?
     @@sessions[name] || self.new(name)
