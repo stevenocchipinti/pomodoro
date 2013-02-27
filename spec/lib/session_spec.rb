@@ -1,12 +1,19 @@
 require './lib/session'
 
 describe Session do
-  describe ".find" do
+  before do
+    Session.class_variable_set(:@@sessions, {})
+  end
 
-    before do
-      Session.class_variable_set(:@@sessions, {})
+  describe ".initialize" do
+    let(:sessions) { Session.class_variable_get(:@@sessions) }
+
+    it "adds the new session object to a class-level hash of all sessions" do
+      expect{Session.find("new")}.to change{sessions.size}.by(1)
     end
+  end
 
+  describe ".find" do
     it "returns the requested session if it exists" do
       session = mock(Session)
       Session.class_variable_set(:@@sessions, {"sesh" => session})
