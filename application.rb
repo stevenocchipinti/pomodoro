@@ -1,6 +1,8 @@
 require "sinatra"
 require "pusher"
 
+require "./lib/session"
+
 Pusher.app_id = ENV["PUSHER_APP_ID"]
 Pusher.key = ENV["PUSHER_KEY"]
 Pusher.secret = ENV["PUSHER_SECRET"]
@@ -25,34 +27,4 @@ post "/" do
   else
     Pusher[session.name].trigger("stop", {})
   end
-end
-
-
-
-class Session
-  attr_accessor :name, :notification_time, :duration
-
-  @@sessions = {}
-
-  def initialize(name, notification_time=nil, duration=25)
-    @name = name
-    @notification_time = notification_time
-    @duration = duration
-    @@sessions[name] = self
-  end
-
-  # TODO: Use underscore stuff, make JS deal with RoR conventions?
-  def to_hash
-    {
-      name: name,
-      notificationTime: notification_time,
-      duration: duration
-    }
-  end
-
-  def self.find(name=nil)
-    name = "default" if !name || name.empty?
-    @@sessions[name] || self.new(name)
-  end
-
 end
