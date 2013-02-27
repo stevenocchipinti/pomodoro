@@ -21,8 +21,9 @@ end
 post "/" do
   session = Session.find(params[:sessionName])
   session.duration = params[:duration]
-  session.notification_time = params[:noticationTime]
-  if session.notification_time
+  session.notification_time = params[:notificationTime]
+
+  if session.notification_time.to_i > 0
     Pusher[session.name].trigger("start", session.to_hash)
   else
     Pusher[session.name].trigger("stop", {})
