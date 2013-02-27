@@ -10,7 +10,6 @@ Pusher.secret = ENV["PUSHER_SECRET"]
 
 get "/*" do |session_name|
   session = Session.find(session_name)
-  # TODO: Use session.to_hash (beware of camel_case)
   erb :index, :locals => {
     session_name: session.name,
     notification_time: session.notification_time,
