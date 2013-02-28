@@ -12,9 +12,11 @@ class Session
 
   def to_hash
     {
-      name: name,
-      notification_time: notification_time,
-      duration: duration
+      session: {
+        name: name,
+        notification_time: notification_time,
+        duration: duration
+      }
     }
   end
 

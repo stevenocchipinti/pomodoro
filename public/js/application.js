@@ -1,14 +1,14 @@
 $(function($) {
 
-  // The following variables are set from the server via index.erb:
-  //   Pomodoro.sessionName
-  //   Pomodoro.serverNotificationTime
+  // Pomodoro.session is set from the server via index.erb
 
   // Setup Pusher for start/stop via WebSockets
   var pusher = new Pusher(Pomodoro.pusherKey);
-  var channel = pusher.subscribe(Pomodoro.sessionName);
+  var channel = pusher.subscribe(Pomodoro.session.name);
   channel.bind('start', function(data) {
-    Pomodoro.timer.set(data.notification_time);
+    // TODO: Remove this duplication
+    $("#minutes").val(data.session.duration);
+    Pomodoro.timer.set(data.session.notification_time);
     Pomodoro.timer.start(function() {
       Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");
     });
@@ -20,15 +20,16 @@ $(function($) {
   // WebKit popup notifications and HTML5 audio playback
   Pomodoro.notifications.setup();
 
+  // TODO: Remove this duplication
+  // Set the notification on the timer and the minutes configuration
+  $("#minutes").val(Pomodoro.session.duration);
+  Pomodoro.timer.set(Pomodoro.session.notificationTime);
+
   // Automatically start the timer if it is already running
-  Pomodoro.timer.set(Pomodoro.serverNotificationTime);
-  if (Pomodoro.serverNotificationTime &&
-      Pomodoro.serverNotificationTime > new Date().getTime()) {
+  if (Pomodoro.session.notificationTime &&
+      Pomodoro.session.notificationTime > new Date().getTime()) {
     Pomodoro.timer.start();
   }
-
-  // Set the configured number of minutes to what ever the server set
-  $("#minutes").val(Pomodoro.duration);
 
   // Make the button notify the server of a start or stop event
   $("#toggle").click(function() {
@@ -38,9 +39,11 @@ $(function($) {
       var notificationTime = null;
     }
     $.post("/", {
-      sessionName: Pomodoro.sessionName,
-      notificationTime: notificationTime,
-      duration: $("#minutes").val()
+      session: {
+        name: Pomodoro.session.name,
+        notification_time: notificationTime,
+        duration: $("#minutes").val()
+      }
     });
   });
 

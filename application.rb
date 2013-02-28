@@ -18,9 +18,9 @@ get "/*" do |session_name|
 end
 
 post "/" do
-  session = Session.find(params[:sessionName])
-  session.duration = params[:duration]
-  session.notification_time = params[:notificationTime]
+  session = Session.find(params[:session][:name])
+  session.duration = params[:session][:duration]
+  session.notification_time = params[:session][:notification_time]
 
   if session.notification_time.to_i > 0
     Pusher[session.name].trigger("start", session.to_hash)

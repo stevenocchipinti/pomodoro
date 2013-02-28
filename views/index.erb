@@ -33,9 +33,11 @@
       var Pomodoro = {
         applicationName: "Pomodoro Timer",
         pusherKey: "<%= ENV['PUSHER_KEY'] %>",
-        sessionName: "<%= session_name %>",
-        serverNotificationTime: parseInt(<%= notification_time %>),
-        duration: parseInt(<%= duration %>)
+        session: {
+          name: "<%= session_name %>",
+          notificationTime: parseInt(<%= notification_time %>),
+          duration: parseInt(<%= duration %>)
+        }
       };
     </script>
 
