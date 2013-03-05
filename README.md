@@ -16,6 +16,16 @@ The notifications use Webkit's notifications (with fallback to alert) and HTML5
 audio playback.
 
 
+Getting started
+---------------
+
+1. Clone the repository
+2. Run `bundle install`
+3. Configure the environment variables in `script/environment.sh`
+4. `source script/environment.sh`
+5. `bundle exec ruby application.rb`
+
+
 Todos
 -----
 
