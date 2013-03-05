@@ -8,6 +8,7 @@ $(function($) {
   channel.bind('start', function(data) {
     // TODO: Remove this duplication
     $("#minutes").val(data.session.duration);
+    Pomodoro.session = data.session;
     Pomodoro.timer.set(data.session.notification_time);
     Pomodoro.timer.start(function() {
       Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");

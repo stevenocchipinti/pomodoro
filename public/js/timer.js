@@ -53,6 +53,7 @@ Pomodoro.timer = {
     if (s.toString().length == 1) s = "0" + s;
     $("#countdown").html(m + ":" + s);
     document.title = "[" + m + ":" + s + "] " + Pomodoro.applicationName;
+    Piecon.setProgress(parseFloat(this.countdown / (Pomodoro.session.duration * 60)) * 100);
   }
 
 };
