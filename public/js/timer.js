@@ -48,12 +48,26 @@ Pomodoro.timer = {
   },
 
   updateDisplay: function() {
+    var timeLeft = this.timeLeft();
+    var percentageLeft = this.percentageLeft();
+    $("#countdown").html(timeLeft);
+    document.title = "[" + timeLeft + "] " + Pomodoro.applicationName;
+    if (percentageLeft == 0 || percentageLeft == 100)
+      Piecon.reset()
+    else
+      Piecon.setProgress(100 - percentageLeft);
+  },
+
+  timeLeft: function() {
     var m = parseInt(this.countdown / 60);
     var s = parseInt(this.countdown - m * 60);
     if (s.toString().length == 1) s = "0" + s;
-    $("#countdown").html(m + ":" + s);
-    document.title = "[" + m + ":" + s + "] " + Pomodoro.applicationName;
-    Piecon.setProgress(parseFloat(this.countdown / (Pomodoro.session.duration * 60)) * 100);
+    return m + ":" + s;
+  },
+
+  percentageLeft: function() {
+    var duration = Pomodoro.session.duration * 60;
+    return (this.countdown / duration) * 100;
   }
 
 };
