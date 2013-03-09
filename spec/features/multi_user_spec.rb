@@ -1,8 +1,8 @@
-feature "Multi-user synchronisation via WebSockets", js: true do
+feature "Multiple user/session synchronisation", js: true do
 
   let(:url) { "/test" }
 
-  scenario "starts the timer when another client clicks 'start'" do
+  scenario "The timer starts when another client clicks 'Start'" do
     Capybara.session_name = "Alice"
     visit url
     page.should have_content "Start"
