@@ -10,6 +10,7 @@ $(function($) {
     $("#minutes").val(data.session.duration);
     Pomodoro.session = data.session;
     Pomodoro.timer.set(data.session.notification_time);
+    // TODO: Remove this duplication
     Pomodoro.timer.start(function() {
       Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");
     });
@@ -28,7 +29,10 @@ $(function($) {
 
   // Automatically start the timer if it is already running
   if (Pomodoro.timer.is_running()) {
-    Pomodoro.timer.start();
+    // TODO: Remove this duplication
+    Pomodoro.timer.start(function() {
+      Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!");
+    });
   }
 
   // Make the button notify the server of a start or stop event
