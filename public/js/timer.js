@@ -68,6 +68,13 @@ Pomodoro.timer = {
   percentageLeft: function() {
     var duration = Pomodoro.session.duration * 60;
     return (this.countdown / duration) * 100;
+  },
+
+  is_running: function() {
+    return (
+      Pomodoro.session.notificationTime &&
+      Pomodoro.session.notificationTime > new Date().getTime()
+    );
   }
 
 };

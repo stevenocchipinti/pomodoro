@@ -27,8 +27,7 @@ $(function($) {
   Pomodoro.timer.set(Pomodoro.session.notificationTime);
 
   // Automatically start the timer if it is already running
-  if (Pomodoro.session.notificationTime &&
-      Pomodoro.session.notificationTime > new Date().getTime()) {
+  if (Pomodoro.timer.is_running()) {
     Pomodoro.timer.start();
   }
 
