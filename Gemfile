@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'pusher'
+gem 'therubyracer'
+gem 'coffee-script'
 
 
 group :development, :test do
