@@ -19,17 +19,16 @@ Pomodoro.timer =
     @set()
 
   start: (onComplete) ->
-    that = this
     @updateDisplay()
     $("#toggle").text "Stop"
     $("#minutes").prop "disabled", true
-    @timer = setInterval ( ->
-      if that.countdown <= 0
-        that.stop()
+    @timer = setInterval ( =>
+      if @countdown <= 0
+        @stop()
         return
-      that.decrement()
-      that.updateDisplay()
-      if that.countdown == 0
+      @decrement()
+      @updateDisplay()
+      if @countdown == 0
         onComplete()
     ), 1000
 
