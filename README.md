@@ -29,9 +29,8 @@ Getting started
 Todos
 -----
 
-* Refactor JS again!!
-* Store statistics (in a Google spreadsheet?)
-* Implement 'breaks'... maybe
+* Make multi-session functionality intuitive
+  * Landing page to _create_ or _load_ a session
 
 
 Caveats
