@@ -2,13 +2,14 @@ jQuery ->
 
   # Pomodoro.session is set from the server via index.erb
 
-  startTimer = ->
-    Pomodoro.timer.start ->
-      Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!")
-
   loadSession = ->
     $("#minutes").val Pomodoro.session.duration
     Pomodoro.timer.set Pomodoro.session.notificationTime
+
+
+  # Setup what to do when the timer is complete (popup notification + sound)
+  Pomodoro.timer.onComplete = ->
+    Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!")
 
 
   # Setup Pusher for start/stop via WebSockets
@@ -17,14 +18,14 @@ jQuery ->
   channel.bind 'start', (data) ->
     Pomodoro.session = data.session
     loadSession()
-    startTimer()
+    Pomodoro.timer.start()
   channel.bind 'stop', (data) ->
     Pomodoro.timer.stop()
 
 
   Pomodoro.notifications.setup()
   loadSession()
-  startTimer() if Pomodoro.timer.is_running()
+  Pomodoro.timer.start() if Pomodoro.timer.is_running()
 
 
   # Make the button notify the server of a start or stop event

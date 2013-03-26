@@ -3,8 +3,8 @@ Pomodoro.timer =
   countdown: 0
   timer: null
 
-  decrement: ->
-    @countdown = @countdown - 1
+  onComplete: ->
+    console.log "Timer is complete"
 
   set: (givenTime) ->
     now = new Date().getTime()
@@ -23,14 +23,15 @@ Pomodoro.timer =
     $("#toggle").text "Stop"
     $("#minutes").prop "disabled", true
     @timer = setInterval ( =>
-      if @countdown <= 0
-        @stop()
-        return
-      @decrement()
-      @updateDisplay()
-      if @countdown == 0
-        onComplete()
+      @tick()
     ), 1000
+
+  tick: ->
+    @countdown = @countdown - 1
+    @updateDisplay()
+    if @countdown <= 0
+      @stop()
+      @onComplete()
 
   stop: ->
     clearInterval @timer
