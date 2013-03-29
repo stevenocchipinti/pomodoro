@@ -20,6 +20,10 @@ class Session
     }
   end
 
+  def self.all
+    @@sessions
+  end
+
   def self.find(name=nil)
     name = "default" if !name || name.empty?
     @@sessions[name] || self.new(name)

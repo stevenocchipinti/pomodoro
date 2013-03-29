@@ -1,0 +1,37 @@
+<div id="countdown">--:--</div>
+
+<div>
+  <label for="timer">
+    <input id="minutes" name="minutes" type="number" value="25" min="0" step="5"/>
+    Minutes
+  </label>
+  <br />
+  <button id="toggle">Start</button>
+</div>
+
+<script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+
+<script src="/js/lib/piecon.min.js"></script>
+
+<script>
+  var Pomodoro = {
+    applicationName: "Pomodoro Timer",
+    pusherKey: "<%= ENV['PUSHER_KEY'] %>",
+    session: {
+      name: "<%= session_name %>",
+      notificationTime: parseInt(<%= notification_time %>),
+      duration: parseInt(<%= duration %>)
+    }
+  };
+
+  Piecon.setOptions({
+    color: '#ff0000',
+    background: '#bbb',
+    shadow: '#fff',
+    fallback: false
+  });
+</script>
+
+<script src="/js/notifications.js"></script>
+<script src="/js/timer.js"></script>
+<script src="/js/application.js"></script>

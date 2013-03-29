@@ -1,67 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Pomodoro Timer</title>
-    <link href='http://fonts.googleapis.com/css?family=Wendy+One' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
-    <link rel="shortcut icon" href="/images/favicon.ico">
-  </head>
+<form action="/" method="get">
+  <input name="session" class="session-name" type="text" placeholder="Enter a session name..."/>
+</form>
+<br />
 
-  <body>
-
-    <a href="https://github.com/stevenocchipinti/pomodoro">
-      <img
-        style="position: absolute; top: 0; right: 0; border: 0;"
-        src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"
-        alt="Fork me on GitHub"/>
-    </a>
-
-    <div id="permission-request">
-      Looks like you haven't enabled desktop notifications,
-      <a href='#' id="permission-request">click here to enable</a>
-    </div>
-
-    <h1>Pomodoro Timer</h1>
-
-    <div id="countdown">--:--</div>
-
-    <div>
-      <label for="timer">
-        <input id="minutes" name="minutes" type="number" value="25" min="0" step="5"/>
-        Minutes
-      </label>
-      <br />
-      <button id="toggle">Start</button>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
-
-    <script src="lib/piecon.min.js"></script>
-
-    <script>
-      var Pomodoro = {
-        applicationName: "Pomodoro Timer",
-        pusherKey: "<%= ENV['PUSHER_KEY'] %>",
-        session: {
-          name: "<%= session_name %>",
-          notificationTime: parseInt(<%= notification_time %>),
-          duration: parseInt(<%= duration %>)
-        }
-      };
-
-      Piecon.setOptions({
-        color: '#ff0000',
-        background: '#bbb',
-        shadow: '#fff',
-        fallback: false
-      });
-    </script>
-
-    <script src="/js/notifications.js"></script>
-    <script src="/js/timer.js"></script>
-    <script src="/js/application.js"></script>
-
-  </body>
-
-</html>
+<ul>
+  <% sessions.keys.each do |session_name| %>
+    <li>
+      <a href="/?session=<%= session_name %>" alt="<%= session_name %>">
+        <%= session_name %>
+      </a>
+    </li>
+  <% end %>
+</ul>

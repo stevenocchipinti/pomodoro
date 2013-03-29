@@ -16,15 +16,21 @@ get "/js/*.js" do |filename|
 end
 
 
-get "/*" do |session_name|
-  session = Session.find(session_name)
-  erb :index, :locals => {
-    session_name: session.name,
-    notification_time: session.notification_time,
-    duration: session.duration
-  }
+get "/" do
+  if params[:session]
+    session = Session.find(params[:session])
+    erb :session, :locals => {
+      session_name: session.name,
+      notification_time: session.notification_time,
+      duration: session.duration
+    }
+  else
+    erb :index, :locals => { sessions: Session.all }
+  end
 end
 
+
+# Stop and Start
 post "/" do
   session = Session.find(params[:session][:name])
   session.duration = params[:session][:duration]

@@ -1,6 +1,6 @@
 feature "Multiple user/session synchronisation", js: true do
 
-  let(:url) { "/test" }
+  let(:url) { "/?session=test" }
 
   scenario "The timer starts when another client clicks 'Start'" do
     Capybara.session_name = "Alice"
