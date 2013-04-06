@@ -29,4 +29,14 @@ describe Session do
       Session.find("").name.should eq("default")
     end
   end
+
+  describe ".destroy" do
+    it "removes the given session from the class-level hash of all sessions" do
+      Session.new("foo")
+      Session.all.should have(1).session
+      Session.destroy("foo")
+      Session.all.should have(0).sessions
+    end
+  end
+
 end
