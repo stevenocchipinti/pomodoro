@@ -43,3 +43,9 @@ post "/" do
     Pusher[session.name].trigger("stop", {})
   end
 end
+
+
+delete "/:name" do
+  Session.destroy(params[:name])
+  redirect "/"
+end

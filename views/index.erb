@@ -11,6 +11,10 @@
         <a href="/?session=<%= session_name %>" alt="<%= session_name %>">
           <%= session_name %>
         </a>
+        <form class="destroy" method="post" action="/<%= session_name %>">
+          <input type="hidden" name="_method" value="delete"/>
+          <button class="destroy" type="submit">&times;</button>
+        </form>
       </li>
     <% end %>
   </ul>

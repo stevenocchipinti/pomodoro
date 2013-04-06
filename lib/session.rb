@@ -29,4 +29,8 @@ class Session
     @@sessions[name] || self.new(name)
   end
 
+  def self.destroy(name)
+    @@sessions.delete(name)
+  end
+
 end

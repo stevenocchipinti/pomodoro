@@ -55,6 +55,16 @@ li:last-child {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+.destroy {
+  display: inline;
+}
+.destroy button {
+  float: right;
+  margin: 0px;
+  padding: 0px 2px;
+  width: 24px;
+  height: 24px;
+}
 .header {
   color: inherit;
   text-decoration: none;
