@@ -26,13 +26,6 @@ Getting started
 5. `bundle exec ruby application.rb`
 
 
-Todos
------
-
-* Make multi-session functionality intuitive
-  * Landing page to _create_ or _load_ a session
-
-
 Caveats
 -------
 
