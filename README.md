@@ -6,6 +6,8 @@ Status
 
 Working!
 
+[![Code Climate](https://codeclimate.com/github/stevenocchipinti/pomodoro.png)](https://codeclimate.com/github/stevenocchipinti/pomodoro)
+
 
 Description
 -----------
