@@ -1,4 +1,5 @@
 require "sinatra"
+require "sinatra/contrib"
 require "pusher"
 require "coffee_script"
 

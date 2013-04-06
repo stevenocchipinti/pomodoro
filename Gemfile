@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'thin'
-gem 'pusher'
 gem 'therubyracer'
 gem 'coffee-script'
+gem 'pusher'
 
 
 group :development, :test do
