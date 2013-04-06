@@ -10,6 +10,9 @@ h1 {
   margin: 30px 0px;
   color: #F00;
 }
+h2 {
+  color: #888;
+}
 div#permission-request {
   display: none;
   background-color: rgba(252, 48, 40, 0.75);
@@ -58,6 +61,7 @@ li:last-child {
 }
 .session-name {
   width: 300px;
+  margin: 80px 0px 60px 0px;
 }
 #countdown {
   font-size: 85px;

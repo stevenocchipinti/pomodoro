@@ -1,14 +1,17 @@
 <form action="/" method="get">
-  <input name="session" class="session-name" type="text" placeholder="Enter a session name..."/>
+  <input name="session" class="session-name" type="text" autofocus="autofocus" placeholder="Enter a session name..."/>
 </form>
 <br />
 
-<ul>
-  <% sessions.keys.each do |session_name| %>
-    <li>
-      <a href="/?session=<%= session_name %>" alt="<%= session_name %>">
-        <%= session_name %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+<% if sessions.any? %>
+  <h2>Or pick an existing session</h2>
+  <ul>
+    <% sessions.keys.each do |session_name| %>
+      <li>
+        <a href="/?session=<%= session_name %>" alt="<%= session_name %>">
+          <%= session_name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
