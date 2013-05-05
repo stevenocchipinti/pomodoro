@@ -1,38 +1,52 @@
-<div id="countdown">--:--</div>
+<div ng-controller="PomodoroCtrl">
+  <div id="countdown">{{timeLeft()}}</div>
 
-<div>
-  <label for="timer">
-    <input id="minutes" name="minutes" type="number" value="25" min="0" step="5"/>
-    Minutes
-  </label>
-  <br />
-  <button id="toggle">Start</button>
+  <div>
+    <label for="timer">
+      <input id="minutes" name="minutes" type="number" ng-model="session.duration" min="0" step="5"/>
+      Minutes
+    </label>
+    <br />
+    <button ng-click="session.toggle()" id="toggle">{{button_label()}}</button>
+  </div>
 </div>
 
 
 
 <% content_for :javascripts do %>
-  <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
-  <script src="/js/lib/piecon.min.js"></script>
   <script>
-    var Pomodoro = {
-      applicationName: "Pomodoro Timer",
-      pusherKey: "<%= ENV['PUSHER_KEY'] %>",
-      session: {
-        name: "<%= session_name %>",
-        notificationTime: parseInt(<%= notification_time %>),
-        duration: parseInt(<%= duration %>)
-      }
-    };
+    function PomodoroCtrl($scope) {
 
-    Piecon.setOptions({
-      color: '#ff0000',
-      background: '#bbb',
-      shadow: '#fff',
-      fallback: false
-    });
+      $scope.session = {
+        duration: 25,     // minutes
+        timeLeft: 1500,   // seconds
+        running: false,
+        toggle: function() {
+          this.running = !this.running
+        }
+      };
+
+      // Display logic stuff
+
+      $scope.timeLeft = function() {
+        if ($scope.session.running) {
+          return $scope.formatTime($scope.session.timeLeft);
+        } else {
+          return $scope.formatTime($scope.session.duration * 60);
+        }
+      };
+
+      $scope.button_label = function() {
+        return $scope.session.running ? "Stop" : "Start";
+      };
+
+      $scope.formatTime = function(seconds) {
+        m = parseInt(seconds / 60);
+        s = parseInt(seconds - m * 60);
+        if (s.toString().length == 1) s = "0" + s;
+        return m + ":" + s;
+      };
+
+    }
   </script>
-  <script src="/js/notifications.js"></script>
-  <script src="/js/timer.js"></script>
-  <script src="/js/application.js"></script>
 <% end %>
