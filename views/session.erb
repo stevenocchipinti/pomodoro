@@ -42,7 +42,7 @@
 
       $scope.formatTime = function(seconds) {
         m = parseInt(seconds / 60);
-        s = parseInt(seconds - m * 60);
+        s = parseInt(seconds % 60);
         if (s.toString().length == 1) s = "0" + s;
         return m + ":" + s;
       };
