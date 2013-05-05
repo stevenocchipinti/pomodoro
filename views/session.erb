@@ -21,9 +21,34 @@
         duration: 25,     // minutes
         timeLeft: 1500,   // seconds
         running: false,
+
+        interval_timer: null,
         toggle: function() {
-          this.running = !this.running
+          this.running ? this.stop() : this.start()
+        },
+
+        start: function() {
+          this.timeLeft = this.duration * 60;
+          var that = this;
+          this.interval_timer = setInterval(function() {
+            $scope.session.timeLeft -= 1;
+            if ($scope.session.timeLeft <= 0) {
+              that.stop();
+              that.notify();
+            }
+            $scope.$apply();
+          }, 1000);
+          this.running = true;
+        },
+        stop: function() {
+          this.running = false;
+          clearInterval(this.interval_timer);
+        },
+
+        notify: function() {
+          console.log("Boom!");
         }
+
       };
 
       // Display logic stuff
