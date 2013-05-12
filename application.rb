@@ -1,15 +1,8 @@
 require "sinatra"
 require "sinatra/contrib"
-require "pusher"
 require "coffee_script"
 
 require "./lib/session"
-require "./lib/environment_variables"
-
-EnvironmentVariables.validate!
-Pusher.app_id = ENV["PUSHER_APP_ID"]
-Pusher.key = ENV["PUSHER_KEY"]
-Pusher.secret = ENV["PUSHER_SECRET"]
 
 
 get "/js/*.js" do |filename|
@@ -19,12 +12,8 @@ end
 
 get "/" do
   if params[:session]
-    session = Session.find(params[:session])
-    erb :session, :locals => {
-      session_name: session.name,
-      notification_time: session.notification_time,
-      duration: session.duration
-    }
+    session = Session.find_or_create(params[:session])
+    erb :session, :locals => { session: session }
   else
     erb :index, :locals => { sessions: Session.all }
   end
@@ -33,15 +22,15 @@ end
 
 # Stop and Start
 post "/" do
-  session = Session.find(params[:session][:name])
-  session.duration = params[:session][:duration]
-  session.notification_time = params[:session][:notification_time]
-
-  if session.notification_time.to_i > 0
-    Pusher[session.name].trigger("start", session.to_hash)
-  else
-    Pusher[session.name].trigger("stop", {})
+  session = Session.find_or_create(params[:session][:name])
+  if params[:session][:duration]
+    session.duration = params[:session][:duration].to_i
   end
+
+  session.start if params[:session][:action].downcase == "start"
+  session.stop if params[:session][:action].downcase == "stop"
+
+  # TODO: Notify the other connected clients
 end
 
 

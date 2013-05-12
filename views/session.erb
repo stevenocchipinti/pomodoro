@@ -9,19 +9,13 @@
   <button id="toggle">Start</button>
 </div>
 
-
-
 <% content_for :javascripts do %>
-  <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
   <script src="/js/lib/piecon.min.js"></script>
   <script>
     var Pomodoro = {
       applicationName: "Pomodoro Timer",
-      pusherKey: "<%= ENV['PUSHER_KEY'] %>",
       session: {
-        name: "<%= session_name %>",
-        notificationTime: parseInt(<%= notification_time %>),
-        duration: parseInt(<%= duration %>)
+        name: "<%= session.name %>"
       }
     };
 
