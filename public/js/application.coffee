@@ -35,3 +35,16 @@ jQuery ->
         session:
           name: Pomodoro.session.name,
           action: "stop",
+
+
+  # TODO: Use this SSE sample code
+
+  # var es = new EventSource('/stream');
+  # es.onmessage = function(e) { $('#chat').append(e.data + "<br>") };
+
+  # // writing
+  # $(document).on('submit', 'form', function(e) {
+  #   $.post('/', {msg: "msg: " + $('#msg').val()});
+  #   $('#msg').val(''); $('#msg').focus();
+  #   e.preventDefault();
+  # });
