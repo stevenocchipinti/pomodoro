@@ -1,54 +1,55 @@
-Pomodoro.timer =
+Pomodoro.Timer = (options) ->
 
+  duration: 0
   countdown: 0
-  timer: null
+  interval: null
 
-  onComplete: ->
-    console.log "Timer is complete"
+  # ============================================================
+  # Callbacks to be set from the constructor
+  # ============================================================
+  onStart: -> options.onStart?()
+  onStop: -> options.onStop?()
+  onUpdate: (status) -> options.onUpdate?(status)
+  onComplete: -> options.onComplete?()
 
-  set: (givenTime) ->
-    now = new Date().getTime()
-    defaultTime = now + $("#minutes").val() * 60 * 1000
-    notificationTime = givenTime or defaultTime
-    seconds = parseInt((notificationTime - now) / 1000)
-    defaultSeconds = parseInt((defaultTime - now) / 1000)
-    @countdown = if seconds > 0 then seconds else defaultSeconds
-    @updateDisplay()
+  # ============================================================
+
+  set: (seconds_left) ->
+    @duration = @countdown = seconds_left
+    @update()
 
   reset: ->
-    @set()
+    @set(@duration)
 
   start: (onComplete) ->
-    @updateDisplay()
-    $("#toggle").text "Stop"
-    $("#minutes").prop "disabled", true
-    @timer = setInterval ( =>
+    @update()
+    @onStart()
+
+    @interval = setInterval ( =>
       @tick()
     ), 1000
 
   tick: ->
     @countdown = @countdown - 1
-    @updateDisplay()
+    @update()
     if @countdown <= 0
       @stop()
       @onComplete()
 
   stop: ->
-    clearInterval @timer
+    clearInterval @interval
     @reset()
-    @updateDisplay()
-    $("#toggle").text "Start"
-    $("#minutes").prop "disabled", false
+    @update()
+    @onStop()
 
-  updateDisplay: ->
-    timeLeft = @timeLeft()
-    percentageLeft = @percentageLeft()
-    $("#countdown").html timeLeft
-    document.title = "[#{timeLeft}] #{Pomodoro.applicationName}"
-    if percentageLeft == 0 or percentageLeft == 100
-      Piecon.reset()
-    else
-      Piecon.setProgress(100 - percentageLeft)
+  update: ->
+    @onUpdate({
+      secondsLeft: @countdown,
+      timeLeft: @timeLeft(),
+      percentageLeft: @percentageLeft(),
+    })
+
+  # ============================================================
 
   timeLeft: ->
     m = parseInt(@countdown / 60)
@@ -57,9 +58,4 @@ Pomodoro.timer =
     "#{m}:#{s}"
 
   percentageLeft: ->
-    duration = Pomodoro.session.duration * 60
-    (@countdown / duration) * 100
-
-  is_running: ->
-    Pomodoro.session.notificationTime &&
-    Pomodoro.session.notificationTime > new Date().getTime()
+    (@countdown / @duration) * 100

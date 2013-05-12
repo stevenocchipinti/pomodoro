@@ -1,36 +1,29 @@
 jQuery ->
 
-  # Pomodoro.session is set from the server via index.erb
-
-  loadSession = ->
-    $("#minutes").val 25 #Pomodoro.session.duration
-    Pomodoro.timer.set null #Pomodoro.session.notificationTime
-
-
-  # Setup what to do when the timer is complete (popup notification + sound)
-  Pomodoro.timer.onComplete = ->
-    Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!")
-
-
-  # # Setup Pusher for start/stop via WebSockets
-  # pusher = new Pusher(Pomodoro.pusherKey)
-  # channel = pusher.subscribe(Pomodoro.session.name)
-  # channel.bind 'start', (data) ->
-  #   Pomodoro.session = data.session
-  #   loadSession()
-  #   Pomodoro.timer.start()
-  # channel.bind 'stop', (data) ->
-  #   Pomodoro.timer.stop()
-
-
   Pomodoro.notifications.setup()
-  loadSession()
-  # Pomodoro.timer.start() if Pomodoro.timer.is_running()
+
+  # Setup a timer with actions to be performed on particular events
+  timer = new Pomodoro.Timer
+    onStart: ->
+      $("#toggle").text "Stop"
+      $("#minutes").prop "disabled", true
+    onStop: ->
+      $("#toggle").text "Start"
+      $("#minutes").prop "disabled", false
+    onUpdate: (status) ->
+      console.log(status)
+      $("#countdown").html status.timeLeft
+      document.title = "[#{status.timeLeft}] #{Pomodoro.applicationName}"
+      if status.percentageLeft == 0 or status.percentageLeft == 100
+        Piecon.reset()
+      else
+        Piecon.setProgress(100 - status.percentageLeft)
+    onComplete: ->
+      Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!")
 
 
   # Make the button notify the server of a start or stop event
   $("#toggle").click ->
-
     if $("#toggle").text() == "Start"
       $.post "/",
         session:
