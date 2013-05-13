@@ -31,10 +31,7 @@ Getting started
 TODOs
 -----
 
-- Make the server respond with "time left" instead of a "notification time"
-  - This will keep timers in sync even when their systems clocks are out
-- Remove dependancy on 'Pusher', could use "sinatra-websocks" instead
-  - This also removes the need to environment variable configs!
+- Allow JS to set duration and secondsLeft independently
 - Experiment with a JavaScript framework to make it easier to read (maybe)
 
 
