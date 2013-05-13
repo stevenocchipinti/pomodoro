@@ -29,7 +29,7 @@ class Session
 
   def time_left
     return nil unless notification_time
-    seconds_left = notification_time - Time.now
+    seconds_left = (notification_time - Time.now).round
     seconds_left > 0 ? seconds_left : 0
   end
 
