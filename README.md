@@ -31,7 +31,6 @@ Getting started
 TODOs
 -----
 
-- Allow JS to set duration and secondsLeft independently
 - Experiment with a JavaScript framework to make it easier to read (maybe)
 
 

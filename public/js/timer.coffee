@@ -14,12 +14,17 @@ Pomodoro.Timer = (options) ->
 
   # ============================================================
 
-  set: (seconds_left) ->
-    @duration = @countdown = seconds_left
+  setDuration: (minutes) ->
+    @duration = minutes * 60
+    @update()
+
+  setSecondsLeft: (seconds_left) ->
+    @countdown = seconds_left
+    @duration = seconds_left unless @duration
     @update()
 
   reset: ->
-    @set(@duration)
+    @setSecondsLeft(@duration)
 
   start: (onComplete) ->
     @update()
