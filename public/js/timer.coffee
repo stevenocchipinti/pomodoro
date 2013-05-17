@@ -49,6 +49,7 @@ Pomodoro.Timer = (options) ->
 
   update: ->
     @onUpdate({
+      duration: parseInt(@duration / 60),
       secondsLeft: @countdown,
       timeLeft: @timeLeft(),
       percentageLeft: @percentageLeft(),

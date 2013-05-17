@@ -52,6 +52,16 @@ describe Session do
     it { should have_key :running }
   end
 
+  describe "#to_json" do
+    it "calls #to_json on the result of #to_hash" do
+      session = Session.new("my-session")
+      hash_mock = mock("hash")
+      session.should_receive(:to_hash).and_return(hash_mock)
+      hash_mock.should_receive(:to_json)
+      session.to_json
+    end
+  end
+
   describe "#time_left" do
     before do
       Time.stub(:now).and_return(10)

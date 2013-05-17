@@ -1,3 +1,5 @@
+require 'json'
+
 class Session
   attr_accessor :name, :duration, :notification_time, :connections
 
@@ -25,6 +27,10 @@ class Session
       time_left: time_left,
       running: running?
     }
+  end
+
+  def to_json
+    to_hash.to_json
   end
 
   def time_left

@@ -11,7 +11,7 @@ jQuery ->
       $("#toggle").text "Start"
       $("#minutes").prop "disabled", false
     onUpdate: (status) ->
-      console.log(status)
+      $("#minutes").val status.duration
       $("#countdown").html status.timeLeft
       document.title = "[#{status.timeLeft}] #{Pomodoro.applicationName}"
       if status.percentageLeft == 0 or status.percentageLeft == 100
@@ -37,14 +37,10 @@ jQuery ->
           action: "stop",
 
 
-  # TODO: Use this SSE sample code
-
-  # var es = new EventSource('/stream');
-  # es.onmessage = function(e) { $('#chat').append(e.data + "<br>") };
-
-  # // writing
-  # $(document).on('submit', 'form', function(e) {
-  #   $.post('/', {msg: "msg: " + $('#msg').val()});
-  #   $('#msg').val(''); $('#msg').focus();
-  #   e.preventDefault();
-  # });
+  # Subscribe to Server Sent Events
+  es = new EventSource "/stream/#{Pomodoro.session.name}"
+  es.onmessage = (event) ->
+    message = JSON.parse event.data
+    timer.setDuration(message.duration)
+    timer.setSecondsLeft(message.time_left)
+    if message.running then timer.start() else timer.stop()
