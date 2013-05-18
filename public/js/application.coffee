@@ -11,13 +11,13 @@ jQuery ->
       $("#toggle").text "Start"
       $("#minutes").prop "disabled", false
     onUpdate: (status) ->
-      $("#minutes").val status.duration
-      $("#countdown").html status.timeLeft
-      document.title = "[#{status.timeLeft}] #{Pomodoro.applicationName}"
+      $("#minutes").val(status.duration)
+      $("#countdown").html(status.timeLeft)
       if status.percentageLeft == 0 or status.percentageLeft == 100
         Piecon.reset()
       else
         Piecon.setProgress(100 - status.percentageLeft)
+      document.title = "[#{status.timeLeft}] #{Pomodoro.applicationName}"
     onComplete: ->
       Pomodoro.notifications.show("Pomodoro", "Pomodoro complete!")
 

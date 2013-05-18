@@ -45,7 +45,6 @@ Pomodoro.Timer = (options) ->
     clearInterval @interval
     @interval = false
     @reset()
-    @update()
     @onStop()
 
   isRunning: ->
