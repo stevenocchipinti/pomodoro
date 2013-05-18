@@ -62,7 +62,7 @@ Pomodoro.Timer = (options) ->
 
   timeLeft: ->
     m = parseInt(@countdown / 60)
-    s = parseInt(@countdown - m * 60)
+    s = parseInt(@countdown % 60)
     s = "0#{s}" if s.toString().length == 1
     "#{m}:#{s}"
 
