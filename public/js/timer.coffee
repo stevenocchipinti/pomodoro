@@ -2,7 +2,7 @@ Pomodoro.Timer = (options) ->
 
   duration: 0
   countdown: 0
-  interval: null
+  interval: false
 
   # ============================================================
   # Callbacks to be set from the constructor
@@ -27,9 +27,9 @@ Pomodoro.Timer = (options) ->
     @setSecondsLeft(@duration)
 
   start: (onComplete) ->
+    return if @isRunning()
     @update()
     @onStart()
-
     @interval = setInterval ( =>
       @tick()
     ), 1000
@@ -43,9 +43,13 @@ Pomodoro.Timer = (options) ->
 
   stop: ->
     clearInterval @interval
+    @interval = false
     @reset()
     @update()
     @onStop()
+
+  isRunning: ->
+    @interval != false
 
   update: ->
     @onUpdate({
