@@ -5,7 +5,6 @@ gem 'sinatra-contrib'
 gem 'thin'
 gem 'therubyracer'
 gem 'coffee-script'
-gem 'pusher'
 
 
 group :development, :test do
