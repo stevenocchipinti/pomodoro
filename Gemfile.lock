@@ -9,6 +9,9 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
+    capybara-webkit (0.14.2)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     coffee-script (2.2.0)
@@ -29,6 +32,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffi (1.4.0)
+    json (1.8.0)
     libv8 (3.3.10.4)
     mime-types (1.21)
     multi_json (1.6.1)
@@ -79,6 +83,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  capybara-webkit
   coffee-script
   debugger
   rspec
