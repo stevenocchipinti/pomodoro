@@ -22,5 +22,5 @@ Getting started
 ---------------
 
 1. Clone the repository
-2. Run `bundle install`
+2. `bundle install`
 5. `bundle exec rackup`
