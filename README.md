@@ -23,4 +23,4 @@ Getting started
 
 1. Clone the repository
 2. `bundle install`
-5. `bundle exec rackup`
+3. `bundle exec rackup`
