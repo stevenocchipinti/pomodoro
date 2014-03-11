@@ -2,3 +2,10 @@ language: ruby
 rvm:
 - 2.1.0
 script: xvfb-run bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: EQOWZ5GI5BVD1QXE25rD3ncRFuEbS5JJI5Ye+0HcWTHVYE4Rnqk05zGeNAk3N022y7FKXNzxw5YUrhWeWd6Z3BMVZ0ZF6y7I3WDhHPysJ9huZUj15syR4yibRA73szhnVscY5U7qGGDSh3cNvT5ni6XXKkXrmambviFKzDyiPFo=
+  app: collabadoro
+  on:
+    repo: stevenocchipinti/pomodoro
