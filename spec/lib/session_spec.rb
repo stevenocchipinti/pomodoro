@@ -55,9 +55,9 @@ describe Session do
   describe "#to_json" do
     it "calls #to_json on the result of #to_hash" do
       session = Session.new("my-session")
-      hash_mock = mock("hash")
-      session.should_receive(:to_hash).and_return(hash_mock)
-      hash_mock.should_receive(:to_json)
+      hash_double = double("hash")
+      session.should_receive(:to_hash).and_return(hash_double)
+      hash_double.should_receive(:to_json)
       session.to_json
     end
   end
@@ -106,7 +106,7 @@ describe Session do
 
   describe ".find_or_create" do
     it "returns the requested session if it exists" do
-      session = mock(Session)
+      session = double(Session)
       Session.class_variable_set(:@@sessions, {"sesh" => session})
       Session.find_or_create("sesh").should eq(session)
     end
