@@ -1,22 +1,20 @@
 Pomodoro.notifications =
 
   setup: ->
-    if window.webkitNotifications
+    if Notification
       $("a#permission-request").click ->
-        window.webkitNotifications.requestPermission()
+        Notification.requestPermission()
         $("#permission-request").hide()
-      if window.webkitNotifications.checkPermission() != 0
+      if Notification.permission == 'default'
         $("#permission-request").slideDown "slow"
 
   show: (title, text) ->
     icon = "images/icon.jpg"
     new Audio("audio/notification.wav").play()
-    if window.webkitNotifications
-      if window.webkitNotifications.checkPermission() == 0
-        popup = window.webkitNotifications.createNotification icon, title, text
-        popup.show()
+    if Notification && Notification.permission == "granted"
+        popup = new Notification(title, body: text, icon: icon)
         setTimeout ( ->
-          popup.cancel()
+          popup.close()
         ), 5000
     else
       alert text
