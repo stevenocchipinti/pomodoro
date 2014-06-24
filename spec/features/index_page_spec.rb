@@ -12,15 +12,15 @@ feature "Index page", js: true do
   scenario "List all existing sessions" do
     Session.new(session_name_two)
     visit url
-    page.should have_content(session_name)
-    page.should have_content(session_name_two)
+    expect(page).to have_content(session_name)
+    expect(page).to have_content(session_name_two)
   end
 
   scenario "Delete an existing session" do
     visit url
-    page.should have_content(session_name)
+    expect(page).to have_content(session_name)
     find("button.destroy").click
-    page.should_not have_content(session_name)
+    expect(page).not_to have_content(session_name)
   end
 
 end

@@ -8,39 +8,39 @@ describe Session do
   describe "#initialize" do
     it "sets the name and duration attributes to the given parameters" do
       session = Session.new("my-session", 1)
-      session.name.should == "my-session"
-      session.duration.should == 1
+      expect(session.name).to eq "my-session"
+      expect(session.duration).to eq 1
     end
 
     it "sets the connections attribute to an empty array" do
       session = Session.new("my-session", 1)
-      session.connections.should == []
+      expect(session.connections).to eq []
     end
 
     it "adds the new session object to a class-level hash of all sessions" do
-      Session.class_variable_get(:@@sessions).should be_empty
+      expect(Session.class_variable_get(:@@sessions)).to be_empty
       Session.new("new")
-      Session.class_variable_get(:@@sessions).should have_key "new"
+      expect(Session.class_variable_get(:@@sessions)).to have_key "new"
     end
   end
 
   describe "#start" do
     it "sets the notification_time to self.duration minutes from Time.now" do
-      Time.stub(:now).and_return(5)                 # seconds
+      allow(Time).to receive(:now).and_return(5)    # seconds
       session = Session.new("my-session", 1)        # minutes
       session.start
-      session.notification_time.should == 65
+      expect(session.notification_time).to eq 65
     end
   end
 
   describe "#stop" do
     it "sets the notification_time to nil" do
-      Time.stub(:now).and_return(5)                 # seconds
+      allow(Time).to receive(:now).and_return(5)    # seconds
       session = Session.new("my-session", 1)        # minutes
       session.start
-      session.notification_time.should_not be_nil
+      expect(session.notification_time).not_to be_nil
       session.stop
-      session.notification_time.should be_nil
+      expect(session.notification_time).to be_nil
     end
   end
 
@@ -56,31 +56,31 @@ describe Session do
     it "calls #to_json on the result of #to_hash" do
       session = Session.new("my-session")
       hash_double = double("hash")
-      session.should_receive(:to_hash).and_return(hash_double)
-      hash_double.should_receive(:to_json)
+      expect(session).to receive(:to_hash).and_return(hash_double)
+      expect(hash_double).to receive(:to_json)
       session.to_json
     end
   end
 
   describe "#time_left" do
     before do
-      Time.stub(:now).and_return(10)
+      allow(Time).to receive(:now).and_return(10)
     end
     let(:session) { Session.new("my-session") }
 
     it "returns nil if the notification_time is not set" do
       session.notification_time = nil
-      session.time_left.should be_nil
+      expect(session.time_left).to be_nil
     end
 
     it "returns zero if the notification_time has passed" do
       session.notification_time = 5
-      session.time_left.should eq(0)
+      expect(session.time_left).to eq(0)
     end
 
     it "returns the number of seconds remaining before the notification_time" do
       session.notification_time = 25
-      session.time_left.should eq(15)
+      expect(session.time_left).to eq(15)
     end
 
   end
@@ -90,16 +90,16 @@ describe Session do
 
     it "returns true when the notification time is in the future" do
       session.notification_time = Time.now + 60*2   # 2 minutes
-      session.should be_running
+      expect(session).to be_running
     end
 
     it "returns false when the notification time is in the past" do
       session.notification_time = Time.now - 60*2   # 2 minutes
-      session.should_not be_running
+      expect(session).not_to be_running
     end
     it "returns false when the notification time is nil" do
       session.notification_time = nil
-      session.should_not be_running
+      expect(session).not_to be_running
     end
   end
 
@@ -108,20 +108,20 @@ describe Session do
     it "returns the requested session if it exists" do
       session = double(Session)
       Session.class_variable_set(:@@sessions, {"sesh" => session})
-      Session.find_or_create("sesh").should eq(session)
+      expect(Session.find_or_create("sesh")).to eq(session)
     end
 
     it "returns a new session if the requested session does not exist" do
-      Session.find_or_create("new-sesh").should be_a Session
+      expect(Session.find_or_create("new-sesh")).to be_a Session
     end
   end
 
   describe ".destroy" do
     it "removes the given session from the class-level hash of all sessions" do
       Session.new("foo")
-      Session.all.should have(1).session
+      expect(Session.all.count).to eq(1)
       Session.destroy("foo")
-      Session.all.should have(0).sessions
+      expect(Session.all.count).to eq(0)
     end
   end
 
