@@ -20,7 +20,12 @@ describe Session do
     it "adds the new session object to a class-level hash of all sessions" do
       expect(Session.class_variable_get(:@@sessions)).to be_empty
       Session.new("new")
-      expect(Session.class_variable_get(:@@sessions)).to have_key "new"
+      expect(Session.class_variable_get(:@@sessions)).not_to be_empty
+    end
+
+    it "creates a case insensitive hash key for session" do
+      Session.new("new sesh")
+      expect(Session.class_variable_get(:@@sessions)).to have_key "NEW SESH"
     end
   end
 
@@ -107,8 +112,14 @@ describe Session do
   describe ".find_or_create" do
     it "returns the requested session if it exists" do
       session = double(Session)
-      Session.class_variable_set(:@@sessions, {"sesh" => session})
-      expect(Session.find_or_create("sesh")).to eq(session)
+      Session.class_variable_set(:@@sessions, {"SESH" => session})
+      expect(Session.find_or_create("SESH")).to eq(session)
+    end
+
+    it "uses case-insensitive matching to return the requested session" do
+      session = double(Session)
+      Session.class_variable_set(:@@sessions, {"SESH" => session})
+      expect(Session.find_or_create("Sesh")).to eq(session)
     end
 
     it "returns a new session if the requested session does not exist" do

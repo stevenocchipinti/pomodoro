@@ -6,12 +6,12 @@
 <% if sessions.any? %>
   <h2>Or pick an existing session</h2>
   <ul>
-    <% sessions.keys.each do |session_name| %>
+    <% sessions.each do |key, session| %>
       <li>
-        <a href="/?session=<%= session_name %>" alt="<%= session_name %>">
-          <%= session_name %>
+        <a href="/?session=<%= key %>" alt="<%= session.name %>">
+          <%= session.name %>
         </a>
-        <form class="destroy" method="post" action="/<%= session_name %>">
+        <form class="destroy" method="post" action="/<%= key %>">
           <input type="hidden" name="_method" value="delete"/>
           <button class="destroy" type="submit">&times;</button>
         </form>

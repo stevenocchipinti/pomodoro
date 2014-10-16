@@ -9,7 +9,7 @@ class Session
     @name = name
     @duration = duration
     @connections = []
-    @@sessions[name] = self
+    @@sessions[self.class.to_key(name)] = self
   end
 
   def start
@@ -49,11 +49,15 @@ class Session
   end
 
   def self.find_or_create(name)
-    @@sessions[name] || self.new(name)
+    @@sessions[to_key(name)] || self.new(name)
   end
 
   def self.destroy(name)
-    @@sessions.delete(name)
+    @@sessions.delete(to_key(name))
+  end
+
+  def self.to_key(name)
+    name.upcase
   end
 
 end
