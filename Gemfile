@@ -8,7 +8,7 @@ gem 'coffee-script'
 
 
 group :development, :test do
-  gem 'debugger'
+  gem 'pry-byebug'
 end
 
 group :test do
