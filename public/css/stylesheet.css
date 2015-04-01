@@ -1,14 +1,20 @@
+html,body {
+  height:100%;
+}
 body {
+  margin: 0;
   text-align: center;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   color: #333;
 }
 h1 {
-  font-family: 'Wendy One', cursive;
   font-size: 64px;
-  text-shadow: #DDD 2px 2px 3px;
-  margin: 30px 0px;
+  margin: 0px 0px;
   color: #F00;
+  height: 15%;
+  line-height: 70px;
+  box-sizing: border-box;
+  padding-top: 20px;
 }
 h2 {
   color: #888;
@@ -19,7 +25,6 @@ div#permission-request {
   line-height: 50px;
   font-size: 18px;
   text-align: center;
-  box-shadow: 0px 3px 3px #888;
 }
 label {
   font-size: 25px;
@@ -30,7 +35,7 @@ input,button {
   padding: 10px;
   margin: 10px;
   font-size: 20px;
-  color: #333;
+  color: #444;
 }
 ul {
   list-style-type: none;
@@ -74,11 +79,17 @@ li:last-child {
   margin: 80px 0px 60px 0px;
 }
 #countdown {
+  box-sizing: border-box;
   font-size: 85px;
-  margin: 80px;
-  text-shadow: #DDD 2px 2px 2px;
+  margin: auto;
   color: #777;
-  margin: 80px;
+  height: 65%;
+  width: 80%;
+  padding: 3%;
+}
+#countdown > svg {
+  height: 100%;
+  width: 100%;
 }
 #minutes {
   width: 60px;
@@ -87,4 +98,9 @@ li:last-child {
 #toggle {
   width: 350px;
   font-size: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+#controls {
+  height: 20%;
 }
