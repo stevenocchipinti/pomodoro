@@ -1,0 +1,37 @@
+ul {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0px;
+}
+li {
+  width: 300px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  padding: 10px;
+  font-size: 20px;
+  color: #333;
+}
+li:first-child {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+li:last-child {
+  border-bottom: 1px solid #aaa;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.destroy {
+  display: inline;
+  button {
+    float: right;
+    margin: 0px;
+    padding: 0px 2px;
+    width: 24px;
+    height: 24px;
+  }
+}
+.session-name {
+  width: 300px;
+  margin: 80px 0px 60px 0px;
+}

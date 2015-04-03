@@ -2,6 +2,19 @@ jQuery ->
 
   Pomodoro.notifications.setup()
 
+  Piecon.setOptions({
+    color: '#ff0000',
+    background: '#bbb',
+    shadow: '#fff',
+    fallback: false
+  })
+
+  progressBar = new ProgressBar.Circle('#countdown', {
+    duration: 200,
+    color: "#FF0000",
+    trailColor: "#ddd"
+  })
+
   # Setup a timer with actions to be performed on particular events
   timer = new Pomodoro.Timer
     onStart: ->
@@ -13,7 +26,7 @@ jQuery ->
     onUpdate: (status) ->
       $("#minutes").val(status.duration)
       progressBar.setText(status.timeLeft)
-      progressBar.animate(1 - status.percentageLeft / 100, {duration: 1000});
+      progressBar.animate(1 - status.percentageLeft / 100, {duration: 1000})
       if status.percentageLeft == 0 or status.percentageLeft == 100
         Piecon.reset()
       else

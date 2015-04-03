@@ -1,0 +1,27 @@
+#countdown {
+  box-sizing: border-box;
+  font-size: 85px;
+  margin: auto;
+  color: #777;
+  height: 65%;
+  width: 80%;
+  padding: 3%;
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+#controls {
+  height: 20%;
+  #minutes {
+    width: 60px;
+    text-align: center;
+  }
+  #toggle {
+    width: 350px;
+    font-size: 30px;
+    background-color: #fff;
+    border-radius: 20px;
+  }
+}

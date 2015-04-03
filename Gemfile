@@ -4,7 +4,10 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'thin'
 gem 'therubyracer'
+
+gem 'sinatra-assetpack'
 gem 'coffee-script'
+gem 'sass'
 
 
 group :development, :test do

@@ -1,12 +1,29 @@
 require "sinatra"
 require "sinatra/contrib"
-require "coffee_script"
+require "sinatra/assetpack"
+require "coffee-script"
+require "sass"
 
 require "./lib/session"
 
 
-get "/js/*.js" do |filename|
-  coffee "../public/js/#{filename}".to_sym
+register Sinatra::AssetPack
+assets do
+  serve '/js',     from: 'public/js'
+  serve '/css',    from: 'public/css'
+  serve '/images', from: 'public/images'
+
+  js :application, [
+    '/js/lib/**/*.js',
+    '/js/*.js'
+  ]
+
+  css :application, [
+    '/css/**/*.css'
+  ]
+
+  js_compression  :jsmin
+  css_compression :simple
 end
 
 
