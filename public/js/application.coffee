@@ -12,7 +12,8 @@ jQuery ->
       $("#minutes").prop "disabled", false
     onUpdate: (status) ->
       $("#minutes").val(status.duration)
-      $("#countdown").html(status.timeLeft)
+      progressBar.setText(status.timeLeft)
+      progressBar.animate(1 - status.percentageLeft / 100, {duration: 1000});
       if status.percentageLeft == 0 or status.percentageLeft == 100
         Piecon.reset()
       else
@@ -44,3 +45,4 @@ jQuery ->
     timer.setDuration(message.duration)
     timer.setSecondsLeft(message.time_left)
     if message.running then timer.start() else timer.stop()
+

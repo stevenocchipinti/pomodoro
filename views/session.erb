@@ -1,6 +1,6 @@
-<div id="countdown">--:--</div>
+<div id="countdown"></div>
 
-<div>
+<div id="controls">
   <label for="timer">
     <input id="minutes" name="minutes" type="number" value="25" min="0" step="5"/>
     Minutes
@@ -11,6 +11,8 @@
 
 <% content_for :javascripts do %>
   <script src="/js/lib/piecon.min.js"></script>
+  <script src="/js/lib/progressbar.min.js"></script>
+
   <script>
     var Pomodoro = {
       applicationName: "Pomodoro Timer",
@@ -25,7 +27,14 @@
       shadow: '#fff',
       fallback: false
     });
+
+    progressBar = new ProgressBar.Circle('#countdown', {
+      duration: 200,
+      color: "#FF0000",
+      trailColor: "#ddd"
+    });
   </script>
+
   <script src="/js/notifications.js"></script>
   <script src="/js/timer.js"></script>
   <script src="/js/application.js"></script>
