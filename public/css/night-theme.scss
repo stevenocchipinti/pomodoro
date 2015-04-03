@@ -1,0 +1,13 @@
+body.night {
+  background-color: #000;
+  color: #ddd;
+  h1 {
+    a, a:visited, a:hover {
+      color: #f00;
+    }
+  }
+  input, button, a, a:visited, a:hover {
+    background-color: #000;
+    color: #ddd;
+  }
+}
