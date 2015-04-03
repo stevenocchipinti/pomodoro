@@ -24,11 +24,12 @@ li:last-child {
 .destroy {
   display: inline;
   button {
+    border: none;
     float: right;
-    margin: 0px;
-    padding: 0px 2px;
-    width: 24px;
-    height: 24px;
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
   }
 }
 .session-name {
