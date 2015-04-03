@@ -7,17 +7,19 @@ body {
   font-family: 'Titillium Web', sans-serif;
   color: #333;
 }
-h1 {
-  font-size: 64px;
-  margin: 0px 0px;
-  color: #F00;
+header {
   height: 15%;
-  line-height: 70px;
-  box-sizing: border-box;
-  padding-top: 20px;
-  a, a:visited, a:hover {
+  h1 {
+    font-size: 64px;
+    margin: 0px 0px;
     color: #F00;
-    text-decoration: none;
+    line-height: 70px;
+    box-sizing: border-box;
+    padding-top: 20px;
+    a, a:visited, a:hover {
+      color: #F00;
+      text-decoration: none;
+    }
   }
 }
 h2 {
