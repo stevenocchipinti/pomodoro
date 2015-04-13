@@ -1,7 +1,7 @@
 Pomodoro.notifications =
 
   setup: ->
-    if Notification
+    if window.Notification
       $("a#permission-request").click ->
         Notification.requestPermission()
         $("#permission-request").hide()
